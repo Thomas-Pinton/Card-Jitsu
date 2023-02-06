@@ -14,7 +14,7 @@ Card::Card()
 
 	text.setString(std::to_string((int)value));
 	text.setFont(*(GraphicManager::getInstance()->loadFont("../Assets/GUI_Essential_Free_v1.1/Font/TTF/m5x7.ttf")));
-	text.setCharacterSize(25);
+	text.setCharacterSize(32);
 	text.setFillColor(sf::Color::Black);
 	text.setPosition(rectangle.getPosition());
 
@@ -25,6 +25,7 @@ Card::Card()
 			break;
 		case water:
 			rectangle.setFillColor(sf::Color::Blue);
+			text.setFillColor(sf::Color::White);
 			break;
 		case snow:
 			rectangle.setFillColor(sf::Color::White);
@@ -35,7 +36,12 @@ Card::Card()
 void Card::setPosition(sf::Vector2f pos)
 {
 	rectangle.setPosition(pos);
-	text.setPosition(pos);
+	sf::FloatRect textRect = text.getLocalBounds();
+
+	text.setOrigin(textRect.left + textRect.width / 2.0f,
+		textRect.top + textRect.height / 2.0f);
+
+	text.setPosition(pos + rectangle.getSize() / 2.0f);
 }
 
 

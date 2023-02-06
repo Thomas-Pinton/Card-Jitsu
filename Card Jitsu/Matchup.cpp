@@ -165,10 +165,13 @@ void Matchup::checkForWin()
 			*/
 			// Testing if colors repeat
 			std::cout << "Jogador 1 ganhou!" << std::endl;
+			statusText.setString("Jogador 1 ganhou!");
+			
 		}
 		else if (player2.pontuation[i].size() > 2)
 		{
 			std::cout << "Jogador 2 ganhou!" << std::endl;
+			statusText.setString("Jogador 2 ganhou!");
 		}
 	}
 	
