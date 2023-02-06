@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Card.hpp"
+#include "GraphicManager.hpp"
 #include <iostream>
 #include <vector>
 
@@ -11,10 +12,16 @@ public:
 	std::vector<Card*> pontuation[3];
 	Card* selectedCard;
 	int chosenCard;
+	int id;
 public:
 	Player();
-	void resetCards();
+	void chooseRandomCard();
+	void buyCards();
+	void addCard();
+
 	void printScore();
+	void printCards();
+
 	~Player();
 };
 

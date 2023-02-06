@@ -1,13 +1,43 @@
 #include "Card.hpp"
-
+#include "GraphicManager.hpp"
 
 Card::Card()
 {
-	element = (Element) (rand() % 3);
-	color = (Color) (rand() % 6);
+	element = (Element)(rand() % 3);
+	color = (Color)(rand() % 6);
 	value = rand() % 10 + 1;
+
 	rectangle.setPosition(0, 0);
+	rectangle.setSize({50, 50});
+	rectangle.setOutlineThickness(2);
+	rectangle.setOutlineColor(sf::Color::Transparent);
+
+	text.setString(std::to_string((int)value));
+	text.setFont(*(GraphicManager::getInstance()->loadFont("../Assets/GUI_Essential_Free_v1.1/Font/TTF/m5x7.ttf")));
+	text.setCharacterSize(25);
+	text.setFillColor(sf::Color::Black);
+	text.setPosition(rectangle.getPosition());
+
+	switch (element) 
+	{
+		case fire:
+			rectangle.setFillColor(sf::Color::Red);
+			break;
+		case water:
+			rectangle.setFillColor(sf::Color::Blue);
+			break;
+		case snow:
+			rectangle.setFillColor(sf::Color::White);
+			break;
+	}
 }
+
+void Card::setPosition(sf::Vector2f pos)
+{
+	rectangle.setPosition(pos);
+	text.setPosition(pos);
+}
+
 
 const std::unordered_map<std::string, Element> element_map {
 	{ "fire", fire },

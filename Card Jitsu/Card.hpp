@@ -26,12 +26,15 @@ enum Element
 class Card
 {
 public:
-	Card();
-public:
 	sf::RectangleShape rectangle;
 	Color color;
 	int value;
 	Element element;
+	sf::Text text;
+public:
+	Card();
+	void setPosition(sf::Vector2f pos);
+
 };
 
 std::ostream& operator<< (std::ostream& COUT, Card& card);
