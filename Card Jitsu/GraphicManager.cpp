@@ -28,6 +28,7 @@ GraphicManager* GraphicManager::getInstance()
 void GraphicManager::printCard(Card* c)
 {
 	window.draw(c->rectangle);
+	window.draw(c->powerShape);
 	window.draw(c->text);
 }
 
@@ -44,6 +45,30 @@ void GraphicManager::clear()
 void GraphicManager::display()
 {
 	window.display();
+}
+
+sf::Texture* GraphicManager::loadTexture(std::string filePath)
+{
+	for (std::map<std::string, sf::Texture*>::iterator paths = textureMap.begin(); paths != textureMap.end(); paths++)
+	{
+		if ((*paths).first == filePath)
+		{
+			return (*paths).second;
+		}
+	}
+
+
+
+	sf::Texture* text = new sf::Texture();
+	if (text->loadFromFile("../Assets/" + filePath))
+	{
+		textureMap.insert({ filePath, text });
+		std::cout << "Image " << "../Assets/" + filePath << "loaded successfully! " << std::endl;
+	}
+
+
+	return text;
+
 }
 
 sf::Font* GraphicManager::loadFont(std::string filePath)

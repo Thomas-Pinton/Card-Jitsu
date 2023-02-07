@@ -6,9 +6,23 @@ Card::Card()
 	element = (Element)(rand() % 3);
 	color = (Color)(rand() % 6);
 	value = rand() % 10 + 1;
+	int p = rand() % 15;
 
-	rectangle.setPosition(0, 0);
-	rectangle.setSize({50, 50});
+	std::string powersFilePath[4] = { "CJ_ 2B2_Power.png", "CJ_Discard_Fire.png", "CJ_Discard_Water.png", "CJ_Discard_Snow.png" };
+
+	if (p <= 3)
+	{
+		power = (Power)p;
+		powerShape.setSize({ 30, 30 });
+		sf::Texture* text = GraphicManager::getInstance()->loadTexture("Images/" + powersFilePath[power]);
+		powerShape.setTexture(text);
+		std::cout << "Power " << std::endl;
+	}
+	else
+		power = (Power)-1;
+
+	rectangle.setSize({ 50, 50 });
+	setPosition({0, 0});
 	rectangle.setOutlineThickness(2);
 	rectangle.setOutlineColor(sf::Color::Transparent);
 
@@ -36,12 +50,19 @@ Card::Card()
 void Card::setPosition(sf::Vector2f pos)
 {
 	rectangle.setPosition(pos);
-	sf::FloatRect textRect = text.getLocalBounds();
+	
+	//setting text position
+	//sf::FloatRect textRect = text.getLocalBounds();
+	//text.setOrigin(textRect.left + textRect.width / 2.0f,
+	//	textRect.top + textRect.height / 2.0f);
+	//text.setPosition(pos + rectangle.getSize() / 2.0f);
 
-	text.setOrigin(textRect.left + textRect.width / 2.0f,
-		textRect.top + textRect.height / 2.0f);
+	sf::Vector2f adjustment = { 5, -10 };
+	text.setPosition(pos + adjustment);
 
-	text.setPosition(pos + rectangle.getSize() / 2.0f);
+	//setting power position (canto inferior direito)
+	powerShape.setPosition(pos + rectangle.getSize() - powerShape.getSize());
+	std::cout << "Power shape position " << powerShape.getPosition().x << " " << powerShape.getPosition().y << std::endl;
 }
 
 

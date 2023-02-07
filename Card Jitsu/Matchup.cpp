@@ -125,7 +125,14 @@ void Matchup::compareCards()
 
 void Matchup::resetCards(Player* winner, Player* loser)
 {
-	
+
+	if (winner->selectedCard->power >= 0)
+	{
+		if (winner->selectedCard->power >= 1)
+			if (loser->pontuation[winner->selectedCard->power - 1].size() > 0)
+				loser->pontuation[winner->selectedCard->power - 1].pop_back();
+	}
+
 	winner->addCard();
 	delete (loser->selectedCard);
 
@@ -141,6 +148,8 @@ void Matchup::resetCards(Player* winner, Player* loser)
 
 void Matchup::checkForWin()
 {
+
+	///*
 	bool p1AllElements = true;
 	bool p2AllElements = true;
 	for (int i = 0; i < 3; i++)
@@ -151,7 +160,7 @@ void Matchup::checkForWin()
 			p2AllElements = false;
 		if (player1.pontuation[i].size() > 2)
 		{
-			/*
+			
 			int diferentColors = 0;
 
 			int colors[6] = {0, 0, 0, 0, 0, 0};
@@ -162,7 +171,7 @@ void Matchup::checkForWin()
 					diferentColors++;
 
 			if (diferentColors > 3)
-			*/
+			
 			// Testing if colors repeat
 			std::cout << "Jogador 1 ganhou!" << std::endl;
 			statusText.setString("Jogador 1 ganhou!");
@@ -179,4 +188,5 @@ void Matchup::checkForWin()
 		std::cout << "Jogador 1 ganhou!" << std::endl;
 	else if (p2AllElements)
 		std::cout << "Jogador 2 ganhou!" << std::endl;
+	//*/
 }

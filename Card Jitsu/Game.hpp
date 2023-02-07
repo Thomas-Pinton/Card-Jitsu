@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Matchup.hpp"
+#include "Card.hpp"
 
 class Game
 {
